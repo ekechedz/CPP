@@ -6,23 +6,21 @@
 
 class ClapTrap
 {
-private:
+protected:
     std::string name;
     unsigned int hitPoints;
     unsigned int energyPoints;
     unsigned int attackDamage;
 
 public:
-    // Constructors and Destructor
     ClapTrap(const std::string &name);
-    ClapTrap(const ClapTrap &other);
-    ClapTrap &operator=(const ClapTrap &other);
-    ~ClapTrap();
+    ClapTrap(const ClapTrap &other);            // Copy Constructor
+    ClapTrap &operator=(const ClapTrap &other); // Assignment Operator
+    ~ClapTrap();                                // Destructor
 
-    // Member functions
     void attack(const std::string &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 };
 
-#endif // CLAPTRAP_HPP
+#endif
