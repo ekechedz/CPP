@@ -1,6 +1,14 @@
 #include "ScavTrap.hpp"
 
-// Constructor
+ScavTrap::ScavTrap()
+    : ClapTrap()
+{
+    this->hitPoints = 100;
+    this->energyPoints = 50;
+    this->attackDamage = 20;
+    std::cout << "ScavTrap default constructor called!" << std::endl;
+}
+
 ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
 {
     hitPoints = 100;
@@ -9,13 +17,13 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
     std::cout << "ScavTrap " << name << " constructed!" << std::endl;
 }
 
-// Copy Constructor
+
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
     std::cout << "ScavTrap " << name << " copied!" << std::endl;
 }
 
-// Assignment Operator
+
 ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
     if (this != &other)
@@ -26,13 +34,12 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
     return *this;
 }
 
-// Destructor
+
 ScavTrap::~ScavTrap()
 {
     std::cout << "ScavTrap " << name << " destructed!" << std::endl;
 }
 
-// Overriding attack
 void ScavTrap::attack(const std::string &target)
 {
     if (energyPoints > 0 && hitPoints > 0)
@@ -47,7 +54,6 @@ void ScavTrap::attack(const std::string &target)
     }
 }
 
-// New functionality: guardGate
 void ScavTrap::guardGate()
 {
     std::cout << "ScavTrap " << name << " is now in Gate keeper mode!" << std::endl;

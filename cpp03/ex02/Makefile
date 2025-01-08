@@ -4,7 +4,7 @@ CCFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Targets
 NAME = claptrap
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 OBJ = $(SRC:.cpp=.o)
 
 # Rules

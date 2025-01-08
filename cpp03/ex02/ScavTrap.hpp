@@ -6,15 +6,14 @@
 class ScavTrap : public ClapTrap
 {
 public:
-    // Constructors
+    ScavTrap();
     ScavTrap(const std::string &name);
     ScavTrap(const ScavTrap &other);
     ScavTrap &operator=(const ScavTrap &other);
     ~ScavTrap();
 
-    // Member functions
-    void attack(const std::string &target); // Overrides ClapTrap's attack
-    void guardGate();                       // New functionality for ScavTrap
+    void attack(const std::string &target); 
+    void guardGate();                      
 };
 
-#endif // SCAVTRAP_HPP
+#endif

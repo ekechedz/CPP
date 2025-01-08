@@ -6,7 +6,7 @@ int main()
 
     clap.attack("Target1");
     clap.takeDamage(3);
-    clap.beRepaired(5);
+    clap.beRepaired(2);
 
     ClapTrap copyClap = clap;
     copyClap.attack("Target2");
