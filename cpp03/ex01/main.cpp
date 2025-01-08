@@ -1,29 +1,37 @@
-#include "ClapTrap.hpp"
+#include <iostream>
+#include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
 int main()
 {
-    // ClapTrap test
-    ClapTrap clap("Clappy");
-    clap.attack("Target1");
-    clap.takeDamage(5);
-    clap.beRepaired(10);
+    std::cout << "=== Default Constructor Test ===" << std::endl;
+    ClapTrap clapDefault;
+    ScavTrap scavDefault;
+    FragTrap fragDefault;
 
-    std::cout << "------" << std::endl;
+    std::cout << "\n=== Parameterized Constructor Test ===" << std::endl;
+    ClapTrap clapParam("Clappy");
+    ScavTrap scavParam("Scavvy");
+    FragTrap fragParam("Fraggy");
 
-    // ScavTrap test
-    ScavTrap scav("Scavvy");
-    scav.attack("Target2");
-    scav.takeDamage(20);
-    scav.beRepaired(15);
-    scav.guardGate();
+    std::cout << "\n=== Copy Constructor Test ===" << std::endl;
+    ClapTrap clapCopy(clapParam);
+    ScavTrap scavCopy(scavParam);
+    FragTrap fragCopy(fragParam);
 
-    std::cout << "------" << std::endl;
+    std::cout << "\n=== Copy Assignment Test ===" << std::endl;
+    ClapTrap clapAssigned;
+    ScavTrap scavAssigned;
+    FragTrap fragAssigned;
+    clapAssigned = clapParam;
+    scavAssigned = scavParam;
+    fragAssigned = fragParam;
 
-    // ScavTrap copy and assignment
-    ScavTrap scavCopy = scav;
-    ScavTrap scavAssigned("AnotherScav");
-    scavAssigned = scav;
+    std::cout << "\n=== Testing Special Functionalities ===" << std::endl;
+    fragParam.highFivesGuys();
+    scavParam.guardGate();
 
+    std::cout << "\n=== Destruction Test ===" << std::endl;
     return 0;
 }
