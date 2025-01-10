@@ -6,14 +6,14 @@
 class Dog : public Animal
 {
 public:
-    // Orthodox Canonical Form
-    Dog();                            // Default Constructor
-    Dog(const Dog &other);            // Copy Constructor
-    Dog &operator=(const Dog &other); // Copy Assignment Operator
-    ~Dog();                           // Destructor
+
+    Dog();
+    Dog(const Dog &other);
+    Dog &operator=(const Dog &other);
+    ~Dog();
 
     // Overridden makeSound function
-    void makeSound() const; // No override keyword in C++98
+    void makeSound() const;
 };
 
 #endif

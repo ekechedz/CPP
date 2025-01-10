@@ -10,10 +10,10 @@ protected:
     std::string type;
 
 public:
-    // Orthodox Canonical Form
-    Animal();                               // Default Constructor
-    Animal(const Animal &other);            // Copy Constructor
-    Animal &operator=(const Animal &other); // Copy Assignment Operator
+
+    Animal();
+    Animal(const Animal &other);
+    Animal &operator=(const Animal &other);
     virtual ~Animal();                      // Virtual Destructor
 
     // Getter for type

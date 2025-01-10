@@ -6,13 +6,13 @@
 class WrongCat : public WrongAnimal
 {
 public:
-    // Orthodox Canonical Form
-    WrongCat();                                 // Default Constructor
-    WrongCat(const WrongCat &other);            // Copy Constructor
-    WrongCat &operator=(const WrongCat &other); // Copy Assignment Operator
-    ~WrongCat();                                // Destructor
 
-    // Member function
+    WrongCat();
+    WrongCat(const WrongCat &other);
+    WrongCat &operator=(const WrongCat &other);
+    ~WrongCat();
+
+
     void makeSound() const;
 };
 
