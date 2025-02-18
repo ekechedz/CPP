@@ -1,34 +1,57 @@
+
 #ifndef AFORM_HPP
 #define AFORM_HPP
 
-#include <iostream>
-#include <stdexcept>
 #include <string>
+#include <iostream>
+#include "Bureaucrat.hpp"
 
-class Bureaucrat; // Forward declaration
+class Bureaucrat;
 
-class AForm {
-public:
-    virtual ~AForm();
-    virtual void execute(Bureaucrat const & executor) const = 0;
+class AForm
+{
+	public:
+		AForm(const std::string& name, int gradeToSign, int gradeToExecute);
+		AForm(const AForm& other);
+		AForm& operator=(const AForm& other);
+		virtual ~AForm();
 
-    bool isSigned() const;
-    std::string getTarget() const;
-    int getSignGrade() const;
-    int getExecGrade() const;
-    void setSigned(bool value) { _signed = value; }
+		std::string getName() const;
+		bool getIsSigned() const;
+		int getGradeToSign() const;
+		int getGradeToExecute() const;
 
+		void beSigned(const Bureaucrat& bureaucrat);
+		virtual void execute(Bureaucrat const & executor) const = 0;
 
-protected:
-    AForm(std::string const & target, int signGrade, int execGrade);
+	protected:
+		void checkExecutionRequirements(Bureaucrat const & executor) const;
 
+	private:
+		const std::string name;
+		bool isSigned;
+		const int gradeToSign;
+		const int gradeToExecute;
 
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 
-private:
-    std::string const _target;
-    int const _signGrade;
-    int const _execGrade;
-    bool _signed;
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 };
+
+std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif

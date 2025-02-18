@@ -2,11 +2,20 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
+#include <cstdlib>
+#include <ctime>
 
-class RobotomyRequestForm : public AForm {
-public:
-    RobotomyRequestForm(std::string const & target);
-    void execute(Bureaucrat const & executor) const;
+class RobotomyRequestForm : public AForm
+{
+	public:
+		RobotomyRequestForm(const std::string& target);
+		RobotomyRequestForm(const RobotomyRequestForm& other);
+		RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
+		virtual ~RobotomyRequestForm();
+
+		void execute(Bureaucrat const & executor) const;
+	private:
+		std::string target;
 };
 
 #endif
