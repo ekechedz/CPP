@@ -1,9 +1,9 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp generate.cpp identify.cpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = converter
+NAME = identify
 
 $(NAME): $(OBJS)
 	$(CXX) $(OBJS) -o $(NAME)
