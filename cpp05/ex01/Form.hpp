@@ -26,22 +26,19 @@ public:
         virtual const char* what() const throw();
     };
 
-    // Constructors & Destructor
+    Form();
     Form(const std::string& name, int gradeToSign, int gradeToExecute);
     Form(const Form& other);
     Form& operator=(const Form& other);
     ~Form();
 
-    // Getters
     std::string getName() const;
     bool getIsSigned() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
 
-    // Member functions
     void beSigned(const Bureaucrat& b);
 
-    // Print function
     std::ostream& print(std::ostream& out) const;
 };
 

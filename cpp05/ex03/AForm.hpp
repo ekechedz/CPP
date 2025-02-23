@@ -11,6 +11,7 @@ class Bureaucrat;
 class AForm
 {
 	public:
+		AForm();
 		AForm(const std::string& name, int gradeToSign, int gradeToExecute);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
