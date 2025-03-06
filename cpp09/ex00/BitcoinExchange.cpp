@@ -12,9 +12,7 @@ BitcoinExchange::~BitcoinExchange() {}
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 {
 	if (this != &src)
-	{
 		this->_database = src._database;
-	}
 	return *this;
 }
 
