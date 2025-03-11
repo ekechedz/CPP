@@ -7,7 +7,11 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	RPN rpn;
-	rpn.evaluate(argv[1]);
-	return 0;
+	try {
+		std::cout << RPN::evaluateExpression(argv[1]) << std::endl;
+	} catch (RPN::InvalidExpressionException &e) {
+		std::cout << "Error" << std::endl;
+	} catch (RPN::DivisionByZeroException &e) {
+		std::cout << "Division by zero" << std::endl;
+	}
 }

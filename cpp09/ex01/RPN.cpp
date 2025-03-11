@@ -1,81 +1,64 @@
 #include "RPN.hpp"
+#include <sstream>
+#include <stdexcept>
+#include <cctype>
+#include <cstdlib>
 
+RPN::RPN() { }
+RPN::~RPN() { }
 
-RPN::RPN() {}
-
-RPN::RPN(const RPN &src) {
-	*this = src;
+const char* RPN::InvalidExpressionException::what() const throw() {
+	return "Invalid RPN expression";
 }
 
-RPN::~RPN() {}
-
-RPN &RPN::operator=(const RPN &src) {
-	if (this != &src)
-		return *this;
-	return *this;
+const char* RPN::DivisionByZeroException::what() const throw() {
+	return "Division by zero";
 }
 
-void RPN::evaluate(const std::string& expr) {
-	std::stack<int> stack;
-	std::stringstream ss(expr);
-	std::string token;
+int RPN::evaluateExpression(const std::string &expression) throw(InvalidExpressionException, DivisionByZeroException) {
+	std::stack<int> valueStack;
+	std::istringstream inputStream(expression);
+	std::string currentToken;
 
-	while (ss >> token)
-	{
-		if (isNumber(token))
-			stack.push(atoi(token.c_str()));
-		else if (isOperator(token))
-		{
-			if (stack.size() < 2)
-			{
-				std::cerr << "Error" << std::endl;
-				return;
+	while (inputStream >> currentToken) {
+		if (currentToken.size() == 1 && _isOperator(currentToken[0])) {
+			if (valueStack.size() < 2)
+				throw InvalidExpressionException();
+			int rightOperand = _pop(valueStack);
+			int leftOperand = _pop(valueStack);
+			valueStack.push(_calculateOperation(leftOperand, rightOperand, currentToken[0]));
+		} else {
+			for (size_t i = 0; i < currentToken.length(); ++i) {
+				if (!std::isdigit(currentToken[i]))
+					throw InvalidExpressionException();
 			}
-			performOperation(token[0]);
-		}
-		else
-		{
-			std::cerr << "Error" << std::endl;
-			return;
+			valueStack.push(std::atoi(currentToken.c_str()));
 		}
 	}
 
-	if (stack.size() != 1)
-		std::cerr << "Error" << std::endl;
-	else
-		std::cout << stack.top() << std::endl;
+	if (valueStack.size() != 1)
+		throw InvalidExpressionException();
+
+	return valueStack.top();
 }
 
-void RPN::performOperation(char op) {
-	std::stack<int> stack;
-	int b = stack.top();
-	stack.pop();
-	int a = stack.top();
-	stack.pop();
-
-	int result;
-	switch (op) {
-		case '+': result = a + b; break;
-		case '-': result = a - b; break;
-		case '*': result = a * b; break;
+int RPN::_calculateOperation(int leftOperand, int rightOperand, char operation) throw(DivisionByZeroException) {
+	switch (operation) {
+		case '+': return leftOperand + rightOperand;
+		case '-': return leftOperand - rightOperand;
+		case '*': return leftOperand * rightOperand;
 		case '/':
-			if (b == 0) {
-				std::cerr << "Error" << std::endl;
-				return;
-			}
-			result = a / b;
-			break;
+			if (rightOperand == 0) throw DivisionByZeroException();
+			return leftOperand / rightOperand;
 		default:
-			std::cerr << "Error" << std::endl;
-			return;
+			throw InvalidExpressionException();
 	}
-	stack.push(result);
 }
 
-bool RPN::isOperator(const std::string& token) {
-	return token == "+" || token == "-" || token == "*" || token == "/";
+bool RPN::_isValidCharacter(char character) {
+	return std::isdigit(character) || _isOperator(character) || std::isspace(character);
 }
 
-bool RPN::isNumber(const std::string& token) {
-	return !token.empty() && std::isdigit(token[0]);
+bool RPN::_isOperator(char character) {
+	return character == '+' || character == '-' || character == '*' || character == '/';
 }
